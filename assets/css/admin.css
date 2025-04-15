@@ -1,0 +1,16 @@
+.taxofilter-admin-screen-options {
+    margin: 10px 0;
+}
+
+.taxofilter-admin-screen-options label {
+    margin-bottom: 5px;
+}
+
+.taxofilter-admin-save {
+    margin-top: 10px;
+}
+
+.taxofilter-admin-save .spinner {
+    float: none;
+    margin: 0 0 0 5px;
+}
