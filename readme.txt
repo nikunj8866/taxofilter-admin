@@ -14,6 +14,8 @@ Adds customizable taxonomy filters for posts and custom post types in the WordPr
 
 TaxoFilter Admin enhances the WordPress admin experience by providing customizable taxonomy filters for all post types.
 
+The plugin is open source and hosted on [GitHub](https://github.com/nikunj8866/taxofilter-admin). If you have any issues or feedback, please open an issue there.
+
 **Key Features:**
 
 * Automatically adds taxonomy dropdowns to post list screens
