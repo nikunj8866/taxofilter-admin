@@ -110,11 +110,8 @@ class TaxoFilter_Admin {
         }
         
         // Get screen options
-        $screen_options = get_option('taxofilter_admin_' . $typenow, true);
-        
-        if (empty($screen_options)) {
-            $screen_options = array();
-        }
+        $screen_options = get_option('taxofilter_admin_' . $typenow, array());
+
         
         foreach ($taxonomies as $taxonomy) {
             // Skip excluded taxonomies
@@ -123,7 +120,7 @@ class TaxoFilter_Admin {
             }
             
             // Check if this taxonomy filter is enabled in screen options
-            if (!isset($screen_options[$taxonomy->name]) || $screen_options[$taxonomy->name]) {
+            if (!empty($screen_options[$taxonomy->name])) {
                 $this->render_taxonomy_dropdown($taxonomy);
             }
         }
@@ -168,11 +165,7 @@ class TaxoFilter_Admin {
         }
         
         // Get screen options
-        $screen_options = get_option('taxofilter_admin_' . $typenow, true);
-        
-        if (empty($screen_options)) {
-            $screen_options = array();
-        }
+        $screen_options = get_option('taxofilter_admin_' . $typenow, array());
         
         $output = '<h5>' . esc_html__('Taxonomy filters', 'taxofilter-admin') . '</h5>';
         $output .= '<div class="taxofilter-admin-screen-options">';
@@ -183,7 +176,7 @@ class TaxoFilter_Admin {
                 continue;
             }
             
-            $checked = (!isset($screen_options[$taxonomy->name]) || $screen_options[$taxonomy->name]) ? 'checked="checked"' : '';
+            $checked = (!empty($screen_options[$taxonomy->name])) ? 'checked="checked"' : '';
             
             $output .= '<label>';
             $output .= '<input type="checkbox" name="taxofilter_admin[' . esc_attr($taxonomy->name) . ']" class="taxofilter-admin-option" value="1" ' . $checked . ' />';
