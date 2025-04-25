@@ -3,7 +3,7 @@
  * Plugin Name: TaxoFilter Admin
  * Plugin URI: https://github.com/nikunj8866/taxofilter-admin
  * Description: Adds customizable taxonomy filters for posts and custom post types in the admin area.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Nikunj Hatkar
  * Author URI: https://github.com/nikunj8866
  * Text Domain: taxofilter-admin
@@ -19,7 +19,7 @@ if (!defined('WPINC')) {
 }
 
 // Define plugin constants
-define('TAXOFILTER_ADMIN_VERSION', '1.0.0');
+define('TAXOFILTER_ADMIN_VERSION', '1.0.1');
 define('TAXOFILTER_ADMIN_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('TAXOFILTER_ADMIN_PLUGIN_URL', plugin_dir_url(__FILE__));
 

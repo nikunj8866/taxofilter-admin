@@ -112,12 +112,25 @@ class TaxoFilter_Admin {
         // Get screen options
         $screen_options = get_option('taxofilter_admin_' . $typenow, array());
 
+        /**
+         * Filters the list of taxonomy slugs to exclude from the taxonomy filter screen options.
+         *
+         * @param array  $excluded_taxonomies Array of taxonomy slugs to exclude.
+         * @param string $typenow             Current post type.
+         * @return array
+         */
+        $excluded_taxonomies = apply_filters('taxofilter_admin_excluded_taxonomies', array(), $typenow);
         
         foreach ($taxonomies as $taxonomy) {
-            // Skip excluded taxonomies
+            // Skip category taxonomies
             if ('post' === $typenow && 'category' === $taxonomy->name) {
                 continue;
             }
+
+            // Skip excluded taxonomies
+			if (in_array($taxonomy->name, $excluded_taxonomies, true)) {
+				continue;
+			}
             
             // Check if this taxonomy filter is enabled in screen options
             if (!empty($screen_options[$taxonomy->name])) {
@@ -133,8 +146,7 @@ class TaxoFilter_Admin {
         $selected = (string) filter_input(INPUT_GET, $taxonomy->query_var);
         
         wp_dropdown_categories(array(
-            /* translators: %s: Taxonomy name */
-            'show_option_all' => sprintf(__('All %s', 'taxofilter-admin'), $taxonomy->label),
+            'show_option_all' => $taxonomy->labels->all_items,
             'orderby'         => 'name',
             'order'           => 'ASC',
             'hide_empty'      => false,
@@ -166,13 +178,27 @@ class TaxoFilter_Admin {
         
         // Get screen options
         $screen_options = get_option('taxofilter_admin_' . $typenow, array());
+
+        /**
+         * Filters the list of taxonomy slugs to exclude from the taxonomy filter screen options.
+         *
+         * @param array  $excluded_taxonomies Array of taxonomy slugs to exclude.
+         * @param string $typenow             Current post type.
+         * @return array
+         */
+        $excluded_taxonomies = apply_filters('taxofilter_admin_excluded_taxonomies', array(), $typenow);
         
         $output = '<h5>' . esc_html__('Taxonomy filters', 'taxofilter-admin') . '</h5>';
         $output .= '<div class="taxofilter-admin-screen-options">';
         
         foreach ($taxonomies as $taxonomy) {
-            // Skip excluded taxonomies
+            // Skip category taxonomies
             if ('post' === $typenow && 'category' === $taxonomy->name) {
+                continue;
+            }
+
+            // Skip excluded taxonomies
+            if (in_array($taxonomy->name, $excluded_taxonomies, true)) {
                 continue;
             }
             

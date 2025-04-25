@@ -3,7 +3,7 @@ Contributors: nikunj8866
 Tags: taxonomy, filters, admin, categories, tags
 Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -39,7 +39,27 @@ Yes, the plugin automatically detects all registered post types and their associ
 
 Yes, you can customize which taxonomy filters appear by accessing the Screen Options panel at the top of any post list screen.
 
+= How can I exclude certain taxonomies from the screen options? =
+
+You can use the `taxofilter_admin_excluded_taxonomies` filter to exclude specific taxonomies from showing up in the screen options for a post type.
+
+Example usage:
+
+```php
+add_filter('taxofilter_admin_excluded_taxonomies', function($excluded, $post_type) {
+    if ($post_type === 'post') {
+        $excluded[] = 'category';
+    }
+    if ($post_type === 'custom_post_type') {
+        $excluded[] = 'custom_taxonomy';
+    }
+    return $excluded;
+}, 10, 2);
+
 == Changelog ==
+
+= 1.0.1 =
+* TWEAK: Added `taxofilter_admin_excluded_taxonomies` filter to allow excluding specific taxonomies from the screen options.
 
 = 1.0.0 =
 * Initial release
